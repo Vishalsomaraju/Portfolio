@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoClose } from "react-icons/io5";
 
-const NAVBAR_HEIGHT = 64; // Your fixed navbar height in px
+const NAVBAR_HEIGHT = 64;
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -12,9 +12,8 @@ export default function Navbar() {
 
   const toggleMenu = () => setMenuOpen((prev) => !prev);
 
-  // Smooth scroll with offset
   const scrollToSection = (id) => {
-    setMenuOpen(false); // close mobile menu on click
+    setMenuOpen(false);
     const element = document.getElementById(id);
     if (element) {
       const elementPosition =
@@ -32,7 +31,7 @@ export default function Navbar() {
     const handleScroll = () => {
       if (!ticking.current) {
         window.requestAnimationFrame(() => {
-          const scrollPos = window.pageYOffset + NAVBAR_HEIGHT + 15; // buffer of 15px
+          const scrollPos = window.pageYOffset + NAVBAR_HEIGHT + 15;
           let current = activeSection;
 
           for (let i = sections.length - 1; i >= 0; i--) {
@@ -53,12 +52,11 @@ export default function Navbar() {
     };
 
     window.addEventListener("scroll", handleScroll);
-    handleScroll(); // run once on mount
+    handleScroll();
 
     return () => window.removeEventListener("scroll", handleScroll);
   }, [activeSection]);
 
-  // Sections to show as links (exclude "home")
   const navSections = ["about", "experience", "projects", "contact"];
 
   return (
